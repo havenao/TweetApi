@@ -2,6 +2,11 @@ class Tweet < ApplicationRecord
   # We search Twitter for recent tweets with specified tags
   # Then we save the tweets to the DB
   def self.pull_recent_tweets
+    client = Twitter::REST::Client.new do |config|
+      config.consumer_key    = Rails.application.credentials.dig(:twitter, :api_key)
+      config.consumer_secret = Rails.application.credentials.dig(:twitter, :api_secret)
+    end
+
     tags_to_search = ['#healthcare', '#nasa', '#opensource']
 
     tags_to_search.each do |hashtag|
@@ -20,11 +25,11 @@ class Tweet < ApplicationRecord
     end
   end
 
-  private 
-    def client
-      Twitter::REST::Client.new do |config|
-        config.consumer_key    = Rails.application.credentials.dig(:twitter, :api_key)
-        config.consumer_secret = Rails.application.credentials.dig(:twitter, :api_secret)
-      end
-    end
+  # private 
+  #   def client
+  #     Twitter::REST::Client.new do |config|
+  #       config.consumer_key    = Rails.application.credentials.dig(:twitter, :api_key)
+  #       config.consumer_secret = Rails.application.credentials.dig(:twitter, :api_secret)
+  #     end
+  #   end
 end
