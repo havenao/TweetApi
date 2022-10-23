@@ -1,15 +1,22 @@
 class Tweet < ApplicationRecord
-  def self.save_search
-    puts "Saving Search"
-    hashtag = "#healthcare"
-    # Todo: If the tweet includes a photo, a link is appended to the end of the text. We want to remove this.
-    @tweets = client.search(hashtag, result_type: "recent", tweet_mode: "extended").take(3)
-    @tweets.each do |tweet|
-      Tweet.create(
-        text: tweet.full_text,
-        tweet_id: tweet.id,
-        tag: hashtag
-      )
+  # We search Twitter for recent tweets with specified tags
+  # Then we save the tweets to the DB
+  def self.pull_recent_tweets
+    tags_to_search = ['#healthcare', '#nasa', '#opensource']
+
+    tags_to_search.each do |hashtag|
+      # Note: This search adds extra information to the tweet text. We may want to find
+      @tweets = client.search(hashtag, result_type: "recent").take(10)
+
+      # Save each tweet to DB
+      @tweets.each do |tweet|
+        Tweet.create(
+          text: tweet.text,
+          tweet_id: tweet.id,
+          tag: hashtag,
+          uri: tweet.uri
+        )
+      end
     end
   end
 

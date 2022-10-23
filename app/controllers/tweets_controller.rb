@@ -1,51 +1,42 @@
 class TweetsController < ApplicationController
-  before_action :set_tweet, only: %i[ show update destroy ]
+  # before_action :set_tweet, only: %i[ show update destroy ]
 
   # GET /tweets
-  def index
-    @tweets = Tweet.all
+  def latest_of_tag
+    tag = '#' + params[:hashtag]
+    @tweets = Tweet.where(tag: tag)
 
     render json: @tweets
   end
 
-  # GET /tweets/1
-  def show
-    render json: @tweet
-  end
+  # # TODO: DELETE ME
+  # def seed
+  #   tags_to_search = ['#healthcare', '#nasa', '#opensource']
 
-  # POST /tweets
-  def create
-    @tweet = Tweet.new(tweet_params)
+  #   tags_to_search.each do |hashtag|
+  #     # Note: If the tweet includes a photo, a link is appended to the end of the text. We may want to remove this.
+  #     @tweets = client.search(hashtag, result_type: "recent", tweet_mode: "extended").take(10)
 
-    if @tweet.save
-      render json: @tweet, status: :created, location: @tweet
-    else
-      render json: @tweet.errors, status: :unprocessable_entity
-    end
-  end
+  #     # Save each tweet to DB
+  #     @tweets.each do |tweet|
+  #       puts tweet.uri
+  #       Tweet.create(
+  #         text: tweet.full_text,
+  #         tweet_id: tweet.id,
+  #         tag: hashtag,
+  #         uri: tweet.uri
+  #       )
+  #     end
+  #   end
+  # end
 
-  # PATCH/PUT /tweets/1
-  def update
-    if @tweet.update(tweet_params)
-      render json: @tweet
-    else
-      render json: @tweet.errors, status: :unprocessable_entity
-    end
-  end
+  # # TODO: DELETE ME
+  # private 
+  #   def client
+  #     Twitter::REST::Client.new do |config|
+  #       config.consumer_key    = Rails.application.credentials.dig(:twitter, :api_key)
+  #       config.consumer_secret = Rails.application.credentials.dig(:twitter, :api_secret)
+  #     end
+  #   end
 
-  # DELETE /tweets/1
-  def destroy
-    @tweet.destroy
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_tweet
-      @tweet = Tweet.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def tweet_params
-      params.require(:tweet).permit(:text, :tweet_id)
-    end
 end
