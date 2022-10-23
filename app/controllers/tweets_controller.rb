@@ -1,6 +1,6 @@
 class TweetsController < ApplicationController
   def index
-    
+    render plain: "Topical Tweets Api Running..."
   end
 
 
