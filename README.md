@@ -5,7 +5,7 @@ This simple Tweet Api lets you access tweets of a given topic.
 Current supported topics are: #healthcare, #nasa, #opensource
 
 Use the GET "/tweets/{topic}" endpoint to return JSON with the lastest 10 tweets on that topic (do not include the "#").
-ex: "https://{root}/tweets/nasa" 
+ex: "https://fierce-lake-18710.herokuapp.com/tweets/nasa" 
 
 We pull the most recent tweets every hour.
 
