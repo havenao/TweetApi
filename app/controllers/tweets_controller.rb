@@ -1,5 +1,8 @@
 class TweetsController < ApplicationController
-  # before_action :set_tweet, only: %i[ show update destroy ]
+  def index
+    
+  end
+
 
   # GET /tweets
   def latest_of_tag
