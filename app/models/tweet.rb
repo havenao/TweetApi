@@ -7,6 +7,7 @@ class Tweet < ApplicationRecord
       config.consumer_secret = Rails.application.credentials.dig(:twitter, :api_secret)
     end
 
+    # We can add more tags here:
     tags_to_search = ['#healthcare', '#nasa', '#opensource']
 
     tags_to_search.each do |hashtag|
@@ -23,12 +24,4 @@ class Tweet < ApplicationRecord
       end
     end
   end
-
-  # private 
-  #   def client
-  #     Twitter::REST::Client.new do |config|
-  #       config.consumer_key    = Rails.application.credentials.dig(:twitter, :api_key)
-  #       config.consumer_secret = Rails.application.credentials.dig(:twitter, :api_secret)
-  #     end
-  #   end
 end
