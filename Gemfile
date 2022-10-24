@@ -50,4 +50,4 @@ end
 
 
 gem "twitter", "~> 7.0"
-# gem "whenever", "~> 1.0.0"
+gem "whenever", "~> 1.0.0"
