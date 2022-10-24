@@ -23,8 +23,8 @@ Ruby version 3.1.2
 - This will open editor. Add:
   ```
   twitter:
-    api_key: "MY_API_KEY"
-    api_secret: "MY_API_SECRET"
+    api_key: MY_API_KEY
+    api_secret: MY_API_SECRET
   ```
 - Save and close the file. This will create "config/credentials/development.yml.enc" and encryption key.
 
@@ -39,8 +39,8 @@ Ruby version 3.1.2
 - This will open editor. Add:
   ```
   twitter:
-    api_key: "MY_API_KEY"
-    api_secret: "MY_API_SECRET"
+    api_key: MY_API_KEY
+    api_secret: MY_API_SECRET
   ```
 - Save and close the file. This will create "config/credentials/production.yml.enc" and encryption key.
 - Need to set in heroku `heroku config:set RAILS_MASTER_KEY=123456789` using production encryption key.
