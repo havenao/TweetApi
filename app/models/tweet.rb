@@ -10,7 +10,6 @@ class Tweet < ApplicationRecord
     tags_to_search = ['#healthcare', '#nasa', '#opensource']
 
     tags_to_search.each do |hashtag|
-      # Note: This search adds extra information to the tweet text. We may want to find a way to remove this
       @tweets = client.search(hashtag, result_type: "recent").take(10)
 
       # Save each tweet to DB
